@@ -3,6 +3,7 @@ buildscript {
         kotlinVersion = '1.2.70'
         springBootVersion = '2.0.5.RELEASE'
         reactorVersion = '3.2.0.RELEASE'
+        kluentVersion = '1.41'
     }
     repositories {
         mavenCentral()
@@ -25,18 +26,25 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
-//    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-webflux'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'com.fasterxml.jackson.module:jackson-module-kotlin'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile "org.jetbrains.kotlin:kotlin-reflect"
     compile "io.projectreactor:reactor-core:$reactorVersion"
     testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.junit.jupiter:junit-jupiter-api'
+    testCompile "org.amshove.kluent:kluent:$kluentVersion"
 }
 
+test {
+    useJUnitPlatform()
+}
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
